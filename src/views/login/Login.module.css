@@ -1,0 +1,23 @@
+.content {
+  height: 100vh;
+  background-color: rgb(35, 39, 65);
+  overflow: hidden;
+}
+
+.formField {
+  position: fixed;
+  width: 500px;
+  height: 300px;
+  background-color: rgba(170, 195, 206, 0.7);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  font-size: 30px;
+  color: white;
+}
