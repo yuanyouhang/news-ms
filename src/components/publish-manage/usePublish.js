@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { notification } from 'antd'
 
-function usePublish(type) {
-  const {username} = JSON.parse(localStorage.getItem('token'))
+function usePublish(type, username) {
+  // const {username} = JSON.parse(localStorage.getItem('token'))
   const [dataSource, setDataSource] = useState()
 
   const getDataSource = () => {

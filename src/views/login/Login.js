@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import { store } from '../../redux/store';
 
 export default function Login() {
   const navigate = useNavigate()
@@ -22,7 +23,11 @@ export default function Login() {
         message.error('用户名或密码错误！');
       }
       else {
-        localStorage.setItem('token', JSON.stringify(res.data[0]))
+        // localStorage.setItem('token', JSON.stringify(res.data[0]))
+        store.dispatch({
+          type: 'add_token',
+          payload: res.data[0]
+        })
         navigate('/')
       }
     })

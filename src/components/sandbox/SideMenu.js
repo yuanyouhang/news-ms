@@ -18,10 +18,8 @@ function SideMenu(props) {
   const [openKeys, setOpenKeys] = useState(['/'+location.pathname.split('/')[1]])
 
   // 获取当前登录用户权限列表
-  const currentUser = JSON.parse(localStorage.getItem('token'))
-  const rights = currentUser.role.rights;
-  const checked = currentUser.role.rights.checked;
-  const rightsList = checked ? checked : rights;
+  const currentUser = props.token
+  const rightsList = currentUser.role.rights;
 
   // 根据当前用户权限过滤侧边栏
   const checkPagePermission = (item) => {
@@ -82,9 +80,12 @@ function SideMenu(props) {
 }
 
 const mapStateToProps = (state) => {
+  // console.log(state)
   const isCollapsed = state.collapsedReducer.isCollapsed
+  const token = state.userReducer.token
   return {
-    isCollapsed
+    isCollapsed,
+    token
   }
 }
 

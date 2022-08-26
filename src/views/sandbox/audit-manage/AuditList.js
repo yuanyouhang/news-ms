@@ -2,9 +2,10 @@ import { Table, Button, Tag, notification } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 
-export default function AuditList() {
-  const { username } = JSON.parse(localStorage.getItem('token'))
+function AuditList(props) {
+  const { username } = props.token
   const [dataSource, setDataSource] = useState([])
   const navigate = useNavigate()
 
@@ -131,3 +132,12 @@ export default function AuditList() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(AuditList)

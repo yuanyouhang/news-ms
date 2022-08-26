@@ -1,13 +1,15 @@
 import { legacy_createStore as createStore, combineReducers } from 'redux'
 import { collapsedReducer } from './reducers/collapsedReducer'
 import { loadingReducer } from './reducers/loadingReducer'
+import { userReducer } from './reducers/userReducer'
 
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 const reducers = combineReducers({
   collapsedReducer,
-  loadingReducer
+  loadingReducer,
+  userReducer
 })
 
 // 持久化 redux 数据

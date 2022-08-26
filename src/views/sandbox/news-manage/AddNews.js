@@ -4,6 +4,7 @@ import axios from 'axios';
 import NewsEditor from '../../../components/news-manage/NewsEditor';
 
 import { useNavigate } from "react-router-dom";
+import { connect } from 'react-redux';
 
 const { Step } = Steps;
 const { Option } = Select;
@@ -17,7 +18,7 @@ const layout = {
   },
 };
 
-export default function AddNews() {
+function AddNews(props) {
   const navigate = useNavigate()
   const [ currentStep, setCurrentStep] = useState(0)
   const [ formRef ] = Form.useForm()
@@ -26,7 +27,7 @@ export default function AddNews() {
   const [ formInfo, setFormInfo ] = useState({})// 新闻基本信息表单
   const [content, setContent ] = useState('')// 富文本内容
 
-  const user = JSON.parse(localStorage.getItem('token')) // 登录的用户信息
+  const user = props.token // 登录的用户信息
 
   useEffect(() => {
     axios.get('/categories').then(res => {
@@ -171,3 +172,12 @@ export default function AddNews() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(AddNews)

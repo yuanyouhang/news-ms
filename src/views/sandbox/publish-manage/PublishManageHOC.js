@@ -3,8 +3,8 @@ import React from 'react'
 import usePublish from '../../../components/publish-manage/usePublish'
 import NewsPublish from '../../../components/publish-manage/NewsPublish'
 
-export default function PublishManageHOC(publishState) {
-  const {dataSource, handlePublish, handleSunset, handleDelete} = usePublish(publishState) // 获取已发布新闻
+export default function PublishManageHOC(publishState, username) {
+  const {dataSource, handlePublish, handleSunset, handleDelete} = usePublish(publishState, username) // 获取已发布新闻
   let handler;
 
   switch(publishState) {

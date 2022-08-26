@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash'
 
 import * as echarts from 'echarts'
+import { connect } from 'react-redux';
 
 const { Meta } = Card;
 
-export default function Home() {
+function Home(props) {
   const [viewList, setViewList] = useState([])
   const [starList, setStarList] = useState([])
   const [pieChart, setPieChart] = useState(null)
@@ -20,7 +21,7 @@ export default function Home() {
   const pieRef = useRef()
   const [visible, setVisible] = useState(false)
 
-  const { username, region, role: { roleName } } = JSON.parse(localStorage.getItem('token'))
+  const { username, region, role: { roleName } } = props.token
 
   useEffect(() => {
     axios.get(`/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6`).then(res => {
@@ -213,3 +214,12 @@ export default function Home() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(Home)

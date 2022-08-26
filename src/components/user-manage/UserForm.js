@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react'
 import { Form, Input, Select } from 'antd'
+import { connect } from 'react-redux';
 
 
 const { Option } = Select;
 
 const UserForm = forwardRef((props,ref) => {
   // const [isDisabled, setIsDisabled] = useState(false)
-  const {roleId, region} = JSON.parse(localStorage.getItem('token'))
+  const {roleId, region} = props.token
   const roleMap = {
     superAdmin: 1,
     admin: 2,
@@ -132,4 +133,11 @@ const UserForm = forwardRef((props,ref) => {
   )
 })
 
-export default UserForm
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(UserForm)

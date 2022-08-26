@@ -3,14 +3,15 @@ import { Button, Table, Modal, notification } from 'antd'
 import axios from 'axios';
 import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined, UploadOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const { confirm } = Modal
 
-export default function NewsDraft() {
+function NewsDraft(props) {
   const [dataSource, setDataSource] = useState([])
   const navigate = useNavigate()
 
-  const {username} = JSON.parse(localStorage.getItem('token'))
+  const {username} = props.token
 
   const showConfirm = (item) => {
     confirm({
@@ -119,3 +120,12 @@ export default function NewsDraft() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(NewsDraft)

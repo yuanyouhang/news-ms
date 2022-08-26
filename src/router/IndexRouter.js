@@ -9,10 +9,7 @@ import NotFound from '../views/404'
 
 import axios from 'axios'
 import lazyLaodHOC from '../components/lazyLaodHOC'
-
-// const lazyImport = (path) => {
-
-// }
+import { connect } from 'react-redux'
 
 const Home = lazyLaodHOC(React.lazy(() => import('../views/sandbox/home/Home')))
 const UserList = lazyLaodHOC(React.lazy(() => import('../views/sandbox/user-manage/UserList')))
@@ -47,7 +44,7 @@ const LocalRouterMap = {
 }
 
 
-export default function IndexRouter() {
+function IndexRouter(props) {
   const [allRouteList, setAllRouteList] = useState([])
 
   const getAllRouteList = () => {
@@ -67,10 +64,9 @@ export default function IndexRouter() {
   }, [])
 
   // 获取当前登录用户权限列表
-  const currentUser = JSON.parse(localStorage.getItem('token'))// bug:退出登录并重新登录并不会触发此组件的更新，所以rightsList并不是最新的
-  const rights = currentUser?.role.rights;
-  const checked = currentUser?.role.rights.checked;
-  const rightsList = checked ? checked : rights;
+  const currentUser = props.token
+  const rightsList = currentUser?.role.rights;
+  console.log(rightsList)
 
   const authRoute = (item) => {
     return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson) && rightsList?.includes(item.key)
@@ -107,3 +103,12 @@ export default function IndexRouter() {
     </HashRouter>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(IndexRouter)

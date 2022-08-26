@@ -2,11 +2,12 @@ import { Button, notification, Table } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default function Audit() {
+function Audit(props) {
   const [news, setNews] = useState([])
 
-  const {roleId, region, username} = JSON.parse(localStorage.getItem('token'))
+  const {roleId, region, username} = props.token
 
   const roleMap = {
     superAdmin: 1,
@@ -101,3 +102,12 @@ export default function Audit() {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(Audit)

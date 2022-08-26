@@ -13,12 +13,12 @@ const { Header } = Layout;
 
 function TopHeader(props) {
   // console.log(props)
-  const {role:{roleName}, username} = JSON.parse(localStorage.getItem('token'))
+  const {role:{roleName}, username} = props.token
 
   const useMenu = () => {
     const navigate = useNavigate()
     const logout = () => {
-      localStorage.removeItem('token')
+      props.removeToken()
       navigate('/login')
     }
     return (
@@ -72,8 +72,10 @@ function TopHeader(props) {
 const mapStateToProps = (state) => {
   // console.log(state)
   const isCollapsed = state.collapsedReducer.isCollapsed
+  const token = state.userReducer.token
   return {
-    isCollapsed
+    isCollapsed,
+    token
   }
 }
 
@@ -81,6 +83,11 @@ const mapDispatchToProps = {
   changeCollapsed() {
     return {
       type: 'change_collapsed'
+    }
+  },
+  removeToken() {
+    return {
+      type: 'remove_token'
     }
   }
 }

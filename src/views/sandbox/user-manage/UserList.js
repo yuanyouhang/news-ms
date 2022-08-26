@@ -3,11 +3,12 @@ import { Button, Table, Modal, Switch } from 'antd'
 import axios from 'axios';
 import { EditOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import UserForm from '../../../components/user-manage/UserForm';
+import { connect } from 'react-redux';
 
 const { confirm } = Modal
 
 
-export default function RightList() {
+function RightList(props) {
   const [isDisabled, setIsDisabled] = useState(false)
 
   const [users, setUsers] = useState([])
@@ -19,7 +20,7 @@ export default function RightList() {
   const updateForm = useRef(null)
   const [currentEditId, setCurrentEditId] = useState(0)
 
-  const {roleId, region, username} = JSON.parse(localStorage.getItem('token'))
+  const {roleId, region, username} = props.token
 
   const showConfirm = (item) => {
     confirm({
@@ -259,3 +260,11 @@ export default function RightList() {
   )
 }
 
+const mapStateToProps = (state) => {
+  const token = state.userReducer.token
+  return {
+    token
+  }
+}
+
+export default connect(mapStateToProps)(RightList)
