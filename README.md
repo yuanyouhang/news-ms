@@ -31,3 +31,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 # json-server 启动服务器应用
 cd db
+执行
+json-server db.json --port 3001
