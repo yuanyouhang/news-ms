@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { Button, Row, Col, Card, List, Avatar, Drawer } from 'antd'
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { PieChartOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 import _ from 'lodash'
@@ -175,13 +175,13 @@ function Home(props) {
               />
             }
             actions={[
-              <SettingOutlined onClick={async () => {
+              <PieChartOutlined onClick={async () => {
                 // 确保两个操作同步
                 await setVisible(true)
                 drawPie()
               }} key="setting" />,
-              <EditOutlined key="edit" />,
-              <EllipsisOutlined key="ellipsis" />,
+              // <EditOutlined key="edit" />,
+              // <EllipsisOutlined key="ellipsis" />,
             ]}
           >
             <Meta

@@ -66,7 +66,7 @@ function IndexRouter(props) {
   // 获取当前登录用户权限列表
   const currentUser = props.token
   const rightsList = currentUser?.role.rights;
-  console.log(rightsList)
+  // console.log(rightsList)
 
   const authRoute = (item) => {
     return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson) && rightsList?.includes(item.key)

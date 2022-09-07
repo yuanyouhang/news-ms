@@ -42,6 +42,7 @@ export default function RightList() {
   const getRights = () => {
     axios.get('/rights?_embed=children').then(res => {
       const data = res.data
+      // console.log(data)
       data.forEach(item => {
         if(item.children?.length===0){
           item.children=''

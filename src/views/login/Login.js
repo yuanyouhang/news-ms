@@ -132,7 +132,7 @@ export default function Login() {
               },
             ]}
           >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="admin" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -146,24 +146,14 @@ export default function Login() {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Password"
+              placeholder="123456"
             />
-          </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
-            Or <a href="">register now!</a>
           </Form.Item>
         </Form>
       </div>
